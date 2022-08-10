@@ -71,9 +71,28 @@ $rs = mysqli_query($conn, $sql);
     </div>
   </div>
 
-  <script type="text/javascript">
+  <button class="btn btn-primary" id="Click">Click</button>
+
+<script type="text/javascript">
+var id =24;
+var a ="Mai"
+
+$.ajax({
+      type: "POST",
+      url: "detail.php",
+      data: {id:id},
+      success:function (response,data){
+        a = response;
+      },
+      error: function (jqXHR, textStatus, errorThrown) { 
+        errorFunction(); 
+        alert("Error")
+      }
+})
 
 $(document).ready(function(){
+  var x="mai";
+
   $(".view_data").click(function(){
     //$("#myModal").modal("show");
     var edit_id = $(this).attr("id");
@@ -81,7 +100,9 @@ $(document).ready(function(){
     $.ajax({
       type: "POST",
       url: "select.php",
-      data: {edit_id:edit_id},
+      data: {
+        edit_id:edit_id,
+      },
       success:function (data){
         $("#detail").html(data);
         $("#myModal").modal("show");
@@ -114,6 +135,12 @@ $(document).ready(function(){
     })
     event.preventDefault();
   });
+
+
+  $("#Click").click(function (event) {
+    alert(a);
+  });
+
 
 });
 
